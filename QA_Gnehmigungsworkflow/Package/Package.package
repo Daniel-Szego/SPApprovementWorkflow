@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="6ea372b7-0a68-4ce9-938c-6257bf41ab23" solutionId="6ea372b7-0a68-4ce9-938c-6257bf41ab23" resetWebServer="false" sharePointProductVersion="15.0" name="QA_Gnehmigungsworkflow" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <assemblies>
+    <customAssembly location="Microsoft.Activities.Design.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\..\..\..\..\Program Files\Reference Assemblies\Microsoft\Workflow Manager\1.0\Microsoft.Activities.Design.dll" />
+    <customAssembly location="Microsoft.Activities.Design.Services.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\..\..\..\..\Program Files\Reference Assemblies\Microsoft\Workflow Manager\1.0\Microsoft.Activities.Design.Services.dll" />
+    <customAssembly location="Microsoft.Activities.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\..\..\..\..\Program Files\Reference Assemblies\Microsoft\Workflow Manager\1.0\Microsoft.Activities.dll" />
+  </assemblies>
+  <features>
+    <featureReference itemId="3ef09383-ef48-4bb1-96af-1ef69a106534" />
+  </features>
+</package>

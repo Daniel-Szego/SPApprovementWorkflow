@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="QAGnehmingungsworkflow" Url="wfsvc/079fea93c94d4b2d918b291f23810fc8">
+    <File Url="Workflow.xaml" Type="GhostableInLibrary" Path="QAGnehmingungsworkflow\Workflow.xaml" DoGUIDFixUp="TRUE">
+      <Property Name="ContentType" Value="WorkflowServiceDefinition" />
+      <Property Name="isReusable" Value="true" />
+      <Property Name="RequiresInitiationForm" Value="True" />
+      <Property Name="RequiresAssociationForm" Value="False" />
+      <Property Name="WSPublishState" Value="3" />
+      <Property Name="WSDisplayName" Value="QAGnehmingungsworkflow" />
+      <Property Name="WSDescription" Value="My 'QAGenehmigungsworkflow' Workflow" />
+      <!-- If you change the name or Url of your custom initiation or association form, 
+           remember to update the corresponding property value (InitiationUrl or AssociationUrl) to match the new web relative url.
+      -->
+      <!--<Property Name="RestrictToType" Value="List" />
+      <Property Name="RestrictToScope" Value="{$ListId:Documents;}" />-->
+      <Property Name="InitiationUrl" Value="wfsvc/079fea93c94d4b2d918b291f23810fc8/QAGnehmingungsworkflow/InitForm.aspx" />
+      <Property Name="RestrictToScope" Value="{$ListId:EmployeeDocuments;}" />
+      <Property Name="RestrictToType" Value="List" />
+    </File>
+    <File Path="QAGnehmingungsworkflow\InitForm.aspx" Url="QAGnehmingungsworkflow/InitForm.aspx" />
+  </Module>
+
+  <ListInstance FeatureId="{2c63df2b-ceab-42c6-aeff-b3968162d4b1}"
+            TemplateType="4501"
+            Title="wfsvc"
+            Description="This list instance is used by SharePoint to keep track of workflows. Do not modify."
+            Url="wfsvc"
+            RootWebOnly="TRUE">
+  </ListInstance>
+  
+</Elements>

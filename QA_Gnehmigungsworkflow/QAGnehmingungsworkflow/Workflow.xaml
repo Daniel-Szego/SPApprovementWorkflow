@@ -1,0 +1,418 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="QA_Gnehmigungsworkflow.QAGnehmingungsworkflow.Workflow"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
+ xmlns:msdad="clr-namespace:Microsoft.SharePoint.DesignTime.Activities.Design;assembly=Microsoft.SharePoint.DesignTime.Activities.Design"
+ xmlns:p="http://schemas.microsoft.com/workflow/2012/07/xaml/activities"
+ xmlns:p1="wf://workflow.windows.net/$Activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="peAppArg" Type="InArgument(x:String)" />
+    <x:Property Name="taDescArg" Type="InArgument(x:String)" />
+  </x:Members>
+  <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
+  <sap2010:WorkflowViewState.IdRef>Itergo.LongialECPM.Application.Workflows.QS_Genehmigungsworkflow.Workflow</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>Microsoft.Activities</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.Activities.Design</AssemblyReference>
+      <AssemblyReference>Microsoft.Activities.Design.Services</AssemblyReference>
+      <AssemblyReference>Microsoft.SharePoint.DesignTime.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.Workflow.Client</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Web</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>Microsoft.SharePoint</AssemblyReference>
+      <AssemblyReference>Microsoft.SharePoint.Client.ServerRuntime</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>QA_Gnehmigungsworkflow</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="email_Approver" />
+      <Variable x:TypeArguments="x:Int32" Name="principalID_Approver" />
+      <Variable x:TypeArguments="p:DynamicValue" Name="dvUser_Approver" />
+      <Variable x:TypeArguments="x:Int32" Name="SingleTaskOut" />
+      <Variable x:TypeArguments="p:DynamicValue" Name="ListItemOut" />
+      <Variable x:TypeArguments="x:Int32" Name="TaskItemID" />
+      <Variable x:TypeArguments="p:DynamicValue" Name="dvUser_Initiator" />
+      <Variable x:TypeArguments="x:Int32" Name="principalID_Initiator" />
+      <Variable x:TypeArguments="x:String" Name="UserName_Initiator" />
+      <Variable x:TypeArguments="p:DynamicValue" Name="dvListItem" />
+      <Variable x:TypeArguments="x:String" Name="DokumentLink" />
+      <Variable x:TypeArguments="x:String" Name="UserLoginName_Approver" />
+      <Variable x:TypeArguments="x:String" Name="DueDate" />
+      <Variable x:TypeArguments="x:String" Name="SiteUri" />
+      <Variable x:TypeArguments="p:DynamicValue" Name="dv_0" />
+      <Variable x:TypeArguments="x:String" Name="link" />
+      <Variable x:TypeArguments="x:String" Name="title" />
+      <Variable x:TypeArguments="sco:Collection(x:String)" Name="Initiator" />
+    </Sequence.Variables>
+    <p1:WriteToHistory sap2010:WorkflowViewState.IdRef="WriteToHistory_1" Message="Starte GenehmigungsWorkflow" />
+    <p1:LookupSPPrincipalId AddToUserInfoList="True" sap2010:WorkflowViewState.IdRef="LookupSPPrincipalId_1">
+      <p1:LookupSPPrincipalId.Result>
+        <OutArgument x:TypeArguments="x:Int32">
+          <mca:CSharpReference x:TypeArguments="x:Int32">principalID_Approver</mca:CSharpReference>
+        </OutArgument>
+      </p1:LookupSPPrincipalId.Result>
+      <p1:LookupSPPrincipalId.UserName>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">peAppArg</mca:CSharpValue>
+        </InArgument>
+      </p1:LookupSPPrincipalId.UserName>
+    </p1:LookupSPPrincipalId>
+    <p1:LookupSPUser sap2010:WorkflowViewState.IdRef="LookupSPUser_1">
+      <p1:LookupSPUser.PrincipalId>
+        <InArgument x:TypeArguments="x:Int32">
+          <mca:CSharpValue x:TypeArguments="x:Int32">principalID_Approver</mca:CSharpValue>
+        </InArgument>
+      </p1:LookupSPUser.PrincipalId>
+      <p1:LookupSPUser.Result>
+        <OutArgument x:TypeArguments="p:DynamicValue">
+          <mca:CSharpReference x:TypeArguments="p:DynamicValue">dvUser_Approver</mca:CSharpReference>
+        </OutArgument>
+      </p1:LookupSPUser.Result>
+    </p1:LookupSPUser>
+    <p:GetODataProperties DisplayName="GetDynamicValueProperties" sap2010:WorkflowViewState.IdRef="GetODataProperties_4">
+      <p:GetODataProperties.Source>
+        <InArgument x:TypeArguments="p:DynamicValue">
+          <mca:CSharpValue x:TypeArguments="p:DynamicValue">dvUser_Approver</mca:CSharpValue>
+        </InArgument>
+      </p:GetODataProperties.Source>
+      <scg:Dictionary x:TypeArguments="x:String, OutArgument" />
+    </p:GetODataProperties>
+    <p:GetODataProperties DisplayName="GetDynamicValueProperties" sap2010:WorkflowViewState.IdRef="GetODataProperties_2">
+      <p:GetODataProperties.Source>
+        <InArgument x:TypeArguments="p:DynamicValue">
+          <mca:CSharpValue x:TypeArguments="p:DynamicValue">dvUser_Approver</mca:CSharpValue>
+        </InArgument>
+      </p:GetODataProperties.Source>
+      <scg:Dictionary x:TypeArguments="x:String, OutArgument">
+        <OutArgument x:TypeArguments="x:String" x:Key="Email">
+          <mca:CSharpReference x:TypeArguments="x:String">email_Approver</mca:CSharpReference>
+        </OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="Title">
+          <mca:CSharpReference x:TypeArguments="x:String">UserLoginName_Approver</mca:CSharpReference>
+        </OutArgument>
+      </scg:Dictionary>
+    </p:GetODataProperties>
+    <p1:LookupWorkflowContextProperty sap2010:WorkflowViewState.IdRef="LookupWorkflowContextProperty_3" PropertyName="CurrentItemUrl">
+      <p1:LookupWorkflowContextProperty.Result>
+        <OutArgument x:TypeArguments="x:String">
+          <mca:CSharpReference x:TypeArguments="x:String">DokumentLink</mca:CSharpReference>
+        </OutArgument>
+      </p1:LookupWorkflowContextProperty.Result>
+    </p1:LookupWorkflowContextProperty>
+    <p1:LookupWorkflowContextProperty sap2010:WorkflowViewState.IdRef="LookupWorkflowContextProperty_4" PropertyName="CurrentWebUrl">
+      <p1:LookupWorkflowContextProperty.Result>
+        <OutArgument x:TypeArguments="x:String">
+          <mca:CSharpReference x:TypeArguments="x:String">SiteUri</mca:CSharpReference>
+        </OutArgument>
+      </p1:LookupWorkflowContextProperty.Result>
+    </p1:LookupWorkflowContextProperty>
+    <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">
+          <mca:CSharpReference x:TypeArguments="x:String">DueDate</mca:CSharpReference>
+        </OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">(DateTime.UtcNow).AddDays(5).ToString()</mca:CSharpValue>
+        </InArgument>
+      </Assign.Value>
+    </Assign>
+    <p1:LookupSPListItem ItemGuid="{x:Null}" Properties="{x:Null}" sap2010:WorkflowViewState.IdRef="LookupSPListItem_1">
+      <p1:LookupSPListItem.ItemId>
+        <InArgument x:TypeArguments="x:Int32">
+          <p:ExpressionContainerValue x:TypeArguments="x:Int32">
+            <p1:GetCurrentItemId />
+          </p:ExpressionContainerValue>
+        </InArgument>
+      </p1:LookupSPListItem.ItemId>
+      <p1:LookupSPListItem.ListId>
+        <InArgument x:TypeArguments="s:Guid">
+          <p:ExpressionContainerValue x:TypeArguments="s:Guid">
+            <p1:GetCurrentListId />
+          </p:ExpressionContainerValue>
+        </InArgument>
+      </p1:LookupSPListItem.ListId>
+      <p1:LookupSPListItem.Result>
+        <OutArgument x:TypeArguments="p:DynamicValue">
+          <mca:CSharpReference x:TypeArguments="p:DynamicValue">dv_0</mca:CSharpReference>
+        </OutArgument>
+      </p1:LookupSPListItem.Result>
+    </p1:LookupSPListItem>
+    <p:GetODataProperties DisplayName="GetDynamicValueProperties" sap2010:WorkflowViewState.IdRef="GetODataProperties_3">
+      <p:GetODataProperties.Source>
+        <InArgument x:TypeArguments="p:DynamicValue">
+          <mca:CSharpValue x:TypeArguments="p:DynamicValue">dv_0</mca:CSharpValue>
+        </InArgument>
+      </p:GetODataProperties.Source>
+      <scg:Dictionary x:TypeArguments="x:String, OutArgument">
+        <OutArgument x:TypeArguments="x:String" x:Key="LinkTitle">
+          <mca:CSharpReference x:TypeArguments="x:String">link</mca:CSharpReference>
+        </OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="Title">
+          <mca:CSharpReference x:TypeArguments="x:String">title</mca:CSharpReference>
+        </OutArgument>
+      </scg:Dictionary>
+    </p:GetODataProperties>
+    <p1:WriteToHistory sap2010:WorkflowViewState.IdRef="WriteToHistory_12">
+      <p1:WriteToHistory.Message>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String" xml:space="preserve">"step 9" +  email_Approver + " x " + principalID_Approver.ToString() + " y" + UserLoginName_Approver</mca:CSharpValue>
+        </InArgument>
+      </p1:WriteToHistory.Message>
+    </p1:WriteToHistory>
+    <p1:SingleTask TaskId="{x:Null}" sap2010:Annotation.AnnotationText="" AssignmentEmailSubject="Aufgabe zugewiesen" CancelationEmailBody="&lt;html&gt;&lt;body style='font-size:11pt;font-family:Segoe UI Light,sans-serif;color:#444444;'&gt;&lt;div&gt;&lt;span style='font-size:13.5pt'&gt;One of your tasks was canceled and deleted. You do not need to take any further action on that task.&lt;/span&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;" CancelationEmailSubject="Task Canceled" CompletedStatus="Abgeschlossen" ContentTypeId="0x0108003365C4474CAE8C42BCE396314E88E51F0020BF7978C489484FB909747E8A7D52BB" DefaultTaskOutcome="0" sap2010:WorkflowViewState.IdRef="SingleTask_1" OutcomeFieldName="TaskOutcome" OverdueEmailBody="&lt;html&gt;&lt;body style='font-size:11pt;font-family:Segoe UI Light,sans-serif;color:#444444;'&gt;&lt;div&gt;&lt;span style='font-size:13.5pt'&gt;You have an &lt;/span&gt;&lt;span style='font-size:13.5pt;color:#ff3b3b;'&gt;overdue&lt;/span&gt;&lt;span style='font-size:13.5pt'&gt; task.&lt;/span&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;" OverdueEmailSubject="Task Overdue" OverdueReminderRepeat="1" OverdueRepeatTimes="1" SendReminderEmail="True" Title="Workflow Aufgabe" WaitForTaskCompletion="True">
+      <p1:SingleTask.AssignedTo>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">UserLoginName_Approver</mca:CSharpValue>
+        </InArgument>
+      </p1:SingleTask.AssignedTo>
+      <p1:SingleTask.AssignmentEmailBody>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">"&lt;html&gt;&lt;body style='font-size:11pt;font-family:Segoe UI Light,sans-serif;color:#444444;'&gt;&lt;div&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;&lt;span style='font-size:13.5pt'&gt;Sie haben eine neue Aufgabe.&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=2&gt;&lt;span style='font-size:18pt'&gt;&lt;a href=\"" + String.Concat(SiteUri, DokumentLink) + "\"&gt;Dokument genehmigen&lt;/a&gt;&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=2&gt;&lt;span style='font-size:12pt'&gt;ZUGEWIESEN AN&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span style='font-size:12pt'&gt;" + UserLoginName_Approver + "&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=2&gt;&lt;span style='font-size:12pt'&gt;F&amp;Auml;LLIGKEITSDATUM&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span style='font-size:12pt'&gt;" + DueDate + "&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=2&gt;&lt;span style='font-size:12pt'&gt;BESCHREIBUNG&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span style='font-size:12pt'&gt;" + taDescArg + "&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"</mca:CSharpValue>
+        </InArgument>
+      </p1:SingleTask.AssignmentEmailBody>
+      <p1:SingleTask.Body>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">"Sie haben eine neue Aufgabe."+ " " + link + " " + title + "\n"</mca:CSharpValue>
+        </InArgument>
+      </p1:SingleTask.Body>
+      <p1:SingleTask.DueDate>
+        <InArgument x:TypeArguments="s:DateTime">
+          <mca:CSharpValue x:TypeArguments="s:DateTime">DateTime.UtcNow + TimeSpan.FromDays(5)</mca:CSharpValue>
+        </InArgument>
+      </p1:SingleTask.DueDate>
+      <p1:SingleTask.Outcome>
+        <OutArgument x:TypeArguments="x:Int32">
+          <mca:CSharpReference x:TypeArguments="x:Int32">SingleTaskOut</mca:CSharpReference>
+        </OutArgument>
+      </p1:SingleTask.Outcome>
+      <p1:SingleTask.RelatedContentLinkListId>
+        <InArgument x:TypeArguments="s:Guid">
+          <p:ExpressionContainerValue x:TypeArguments="s:Guid">
+            <p1:GetCurrentListId />
+          </p:ExpressionContainerValue>
+        </InArgument>
+      </p1:SingleTask.RelatedContentLinkListId>
+      <p1:SingleTask.RelatedContentLinkListItemId>
+        <InArgument x:TypeArguments="s:Guid">
+          <p:ExpressionContainerValue x:TypeArguments="s:Guid">
+            <p1:GetCurrentItemGuid />
+          </p:ExpressionContainerValue>
+        </InArgument>
+      </p1:SingleTask.RelatedContentLinkListItemId>
+      <p1:SingleTask.RelatedContentLinkListItemIntegerId>
+        <InArgument x:TypeArguments="x:Int32">
+          <p:ExpressionContainerValue x:TypeArguments="x:Int32">
+            <p1:GetCurrentItemId />
+          </p:ExpressionContainerValue>
+        </InArgument>
+      </p1:SingleTask.RelatedContentLinkListItemIntegerId>
+      <p1:SingleTask.TaskItemId>
+        <OutArgument x:TypeArguments="x:Int32">
+          <mca:CSharpReference x:TypeArguments="x:Int32">TaskItemID</mca:CSharpReference>
+        </OutArgument>
+      </p1:SingleTask.TaskItemId>
+    </p1:SingleTask>
+    <p1:LookupWorkflowContextProperty sap2010:WorkflowViewState.IdRef="LookupWorkflowContextProperty_2" PropertyName="InitiatorUserId">
+      <p1:LookupWorkflowContextProperty.Result>
+        <OutArgument x:TypeArguments="x:String">
+          <mca:CSharpReference x:TypeArguments="x:String">UserName_Initiator</mca:CSharpReference>
+        </OutArgument>
+      </p1:LookupWorkflowContextProperty.Result>
+    </p1:LookupWorkflowContextProperty>
+    <p1:WriteToHistory sap2010:WorkflowViewState.IdRef="WriteToHistory_14" Message="step 11" />
+    <p:BuildCollection x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="BuildCollection`1_1">
+      <p:BuildCollection.Result>
+        <OutArgument x:TypeArguments="sco:Collection(x:String)">
+          <mca:CSharpReference x:TypeArguments="sco:Collection(x:String)">Initiator</mca:CSharpReference>
+        </OutArgument>
+      </p:BuildCollection.Result>
+      <p:BuildCollection.Values>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">UserName_Initiator</mca:CSharpValue>
+        </InArgument>
+      </p:BuildCollection.Values>
+    </p:BuildCollection>
+    <If sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Condition>
+        <InArgument x:TypeArguments="x:Boolean">
+          <mca:CSharpValue x:TypeArguments="x:Boolean">SingleTaskOut == 0</mca:CSharpValue>
+        </InArgument>
+      </If.Condition>
+      <If.Then>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="WorkflowContext_Initiator" />
+          </Sequence.Variables>
+          <p1:WriteToHistory sap2010:WorkflowViewState.IdRef="WriteToHistory_15">
+            <p1:WriteToHistory.Message>
+              <InArgument x:TypeArguments="x:String">
+                <mca:CSharpValue x:TypeArguments="x:String">"Approved" + Initiator[0].ToString();</mca:CSharpValue>
+              </InArgument>
+            </p1:WriteToHistory.Message>
+          </p1:WriteToHistory>
+          <p1:Email AdditionalHeaders="{x:Null}" BCC="{x:Null}" CC="{x:Null}" Body="Das Dokument wurde genehmigt" sap2010:WorkflowViewState.IdRef="Email_1" Subject="Document Approved">
+            <p1:Email.To>
+              <InArgument x:TypeArguments="sco:Collection(x:String)">
+                <mca:CSharpValue x:TypeArguments="sco:Collection(x:String)">Initiator</mca:CSharpValue>
+              </InArgument>
+            </p1:Email.To>
+          </p1:Email>
+          <p1:WriteToHistory sap2010:WorkflowViewState.IdRef="WriteToHistory_3" Message="Approved" />
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <p1:WriteToHistory sap2010:WorkflowViewState.IdRef="WriteToHistory_16" Message="Rejected" />
+          <p1:Email AdditionalHeaders="{x:Null}" BCC="{x:Null}" CC="{x:Null}" Body="Das Dokument wurde nicht genehmigt" sap2010:WorkflowViewState.IdRef="Email_2" Subject="Document rejected">
+            <p1:Email.To>
+              <InArgument x:TypeArguments="sco:Collection(x:String)">
+                <mca:CSharpValue x:TypeArguments="sco:Collection(x:String)">Initiator</mca:CSharpValue>
+              </InArgument>
+            </p1:Email.To>
+          </p1:Email>
+          <p1:WriteToHistory sap2010:WorkflowViewState.IdRef="WriteToHistory_4" Message="Rejected" />
+        </Sequence>
+      </If.Else>
+    </If>
+    <p1:WriteToHistory sap2010:WorkflowViewState.IdRef="WriteToHistory_2" Message="Genehmigungsworkflow beendet" />
+    <sads:DebugSymbol.Symbol>d3FDOlx3b3JrXGNvZGVfQWRlc3NvXFNvdXJjZV9Pd25cUUFfR25laG1pZ3VuZ3N3b3JrZmxvd1xRQV9HbmVobWlndW5nc3dvcmtmbG93XFFBR25laG1pbmd1bmdzd29ya2Zsb3dcV29ya2Zsb3cueGFtbF44A7cCDgIBAU0FTXMDAbIFTgVZHgMBhgVaBWUXAwHbBGYFbRwDAcUEbgV8HAMBhQR9BYMBKAMB7gOEAQWKASgDAdcDiwEFlgEOAwGsA5cBBasBGwMBlAOsAQW6ARwDAdQCuwEFwQEZAwG+AsIBBfYBFQMBrgH3AQX9ASgDAZcB/gEF/gFgAwGVAf8BBYoCGQIBaosCBbQCCgIBBLUCBbUCdAIBAk1TTXADAbMFTi9ONQMBsQVWC1ZRAwGcBVELUWQDAYcFXQtdXAMB8QRiC2JmAwHcBGkLaV4DAcYEdgt2XwMBsARxC3FeAwGbBHkLeWcDAYYEgAELgAFdAwHwA312fYYBAwHvA4cBC4cBWAMB2QOEAXaEAYUBAwHYA5MBC5MBcAMBwgOOAQuOAVgDAa0DoQELowEoAwGrA6gBC6gBWwMBlgOaAQucASgDAZUDtAELtAFVAwH/Aq8BC68BUwMB6gK3AQu3AVYDAdUCvgELvgHCAQMBvwLKAQvKAZ8JAwGpAsIBtAXCAcEFAwGoAsIB+QjCAfwIAwGnAsIBjAHCAbkDAwGmAt4BC+ABKAMBpQLCAfAEwgHzBAMBpALPAQvPAYgBAwGPAtkBC9kBXQMB+gHCAfIDwgGBBAMB+QHCAY8JwgGVCQMB+AHlAQvnASgDAfcB1AEL1AFxAwHiAcIBvQjCAcsIAwHhAewBC+4BKAMB4AHCAZwJwgGuCQMB3wHCAdMFwgGoCAMB3gHCAZAEwgHcBAMB3QHFAQvFAV8DAcgB8wEL8wFaAwGzAcIBxQnCAcsJAwGyAcIBYsIBdgMBsQHCAdIDwgHhAwMBsAHCAeIIwgHlCAMBrwH6AQv6AWMDAZkB9wF29wGHAQMBmAH+AVT+AV0DAZYBhwILhwJbAwGAAYICC4ICagIBa44CC44CXAIBBZICCaUCFAIBN6gCCbICFAIBGrUCU7UCcQIBA6IBDaIBJAQBqwMBmwENmwEkBAGVAwHfAQ3fASQEAaUCAeYBDeYBJgQB9wEB7QEN7QEkBAHgAQGWAgucAh8CAVOdAgujAhYCATqkAgukAmYCATipAgupAmcCATWqAguwAhYCAR2xAguxAmYCARuZAhGZAnQCAVSgAhGgAmgCAT2dAlSdAnICATydAqUBnQK4AQIBO6QCWaQCYwIBOakCWqkCZAIBNq0CEa0CaAIBIKoCVKoCeAIBH6oCqwGqAr4BAgEesQJZsQJjAgEc</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="WriteToHistory_1" sap:VirtualizedContainerService.HintSize="469,68" />
+      <sap2010:ViewStateData Id="LookupSPPrincipalId_1" sap:VirtualizedContainerService.HintSize="469,68" />
+      <sap2010:ViewStateData Id="LookupSPUser_1" sap:VirtualizedContainerService.HintSize="469,89" />
+      <sap2010:ViewStateData Id="GetODataProperties_4" sap:VirtualizedContainerService.HintSize="469,92">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:String x:Key="Properties.SelectedEntityType">SharePoint_User</x:String>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GetODataProperties_2" sap:VirtualizedContainerService.HintSize="469,92">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:String x:Key="Properties.SelectedEntityType">SharePoint_User</x:String>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LookupWorkflowContextProperty_3" sap:VirtualizedContainerService.HintSize="469,68">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
+              <msdad:ViewStateNameValue x:Key="PropertyName" DisplayName="Current Item URL" Value="CurrentItemUrl" />
+            </scg:Dictionary>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LookupWorkflowContextProperty_4" sap:VirtualizedContainerService.HintSize="469,68">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
+              <msdad:ViewStateNameValue x:Key="PropertyName" DisplayName="Current Site URL" Value="CurrentWebUrl" />
+            </scg:Dictionary>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="469,62" />
+      <sap2010:ViewStateData Id="LookupSPListItem_1" sap:VirtualizedContainerService.HintSize="469,89">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
+              <msdad:ViewStateNameValue x:Key="ItemId" DisplayName="(current item)" Value="$CurrentItemId" />
+              <msdad:ViewStateNameValue x:Key="ListId" DisplayName="(current list)" Value="$CurrentListId" />
+            </scg:Dictionary>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GetODataProperties_3" sap:VirtualizedContainerService.HintSize="469,92">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:String x:Key="Properties.SelectedEntityType">Lists/WorkflowTaskList</x:String>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WriteToHistory_12" sap:VirtualizedContainerService.HintSize="469,68" />
+      <sap2010:ViewStateData Id="SingleTask_1" sap:VirtualizedContainerService.HintSize="469,112">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LookupWorkflowContextProperty_2" sap:VirtualizedContainerService.HintSize="469,68">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
+              <msdad:ViewStateNameValue x:Key="PropertyName" DisplayName="Initiator" Value="InitiatorUserId" />
+            </scg:Dictionary>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WriteToHistory_14" sap:VirtualizedContainerService.HintSize="469,68" />
+      <sap2010:ViewStateData Id="BuildCollection`1_1" sap:VirtualizedContainerService.HintSize="469,22" />
+      <sap2010:ViewStateData Id="WriteToHistory_15" sap:VirtualizedContainerService.HintSize="200,68" />
+      <sap2010:ViewStateData Id="Email_1" sap:VirtualizedContainerService.HintSize="200,68" />
+      <sap2010:ViewStateData Id="WriteToHistory_3" sap:VirtualizedContainerService.HintSize="200,68" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="222,408">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WriteToHistory_16" sap:VirtualizedContainerService.HintSize="200,68" />
+      <sap2010:ViewStateData Id="Email_2" sap:VirtualizedContainerService.HintSize="200,68" />
+      <sap2010:ViewStateData Id="WriteToHistory_4" sap:VirtualizedContainerService.HintSize="200,68" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="222,408">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="469,558" />
+      <sap2010:ViewStateData Id="WriteToHistory_2" sap:VirtualizedContainerService.HintSize="469,68" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="491,2516">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Itergo.LongialECPM.Application.Workflows.QS_Genehmigungsworkflow.Workflow" sap:VirtualizedContainerService.HintSize="531,2596" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
